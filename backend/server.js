@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv").config();
-const port = process.env.SERVER_PORT || 5000;
+const port = process.env.PORT || 5000;
 const { cloudinary } = require("./utils/cloudinary");
 const { dbConnect, ImageModel } = require("./config/db");
 dbConnect();
