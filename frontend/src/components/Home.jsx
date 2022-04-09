@@ -10,9 +10,13 @@ function Home({ modified, setModified }) {
   const [loading, setLoading] = useState(true);
 
   const loadImages = async () => {
-    const res = await (await fetch("/api/images")).json();
-    const images = res.map(image => image);
-    setImages(images);
+    try {
+      const res = await (await fetch("/api/images")).json();
+      const images = res.map(image => image);
+      setImages(images);
+    } catch (error) {
+      throw error;
+    }
   };
 
   const handleDelete = async image => {
