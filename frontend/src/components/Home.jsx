@@ -8,14 +8,18 @@ function Home({ modified, setModified }) {
   // const [imageIds, setImageIds] = useState(null);
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const loadImages = async () => {
     try {
       const res = await (await fetch("/api/images")).json();
+      if (!res.length) {
+        return setError(res.message);
+      }
       const images = res.map(image => image);
       setImages(images);
     } catch (error) {
-      throw error;
+      console.error(error);
     }
   };
 
@@ -56,6 +60,9 @@ function Home({ modified, setModified }) {
 
   if (loading) {
     return <Spinner />;
+  }
+  if (error) {
+    return <h1>{error}</h1>;
   }
   return (
     <div>
